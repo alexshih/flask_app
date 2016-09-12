@@ -7,19 +7,34 @@
             <div class="container">
                 {% if businesses %}
                     <h1>The Top 3 suggestions near you are:</h1><br>
+                    <!-- Organize results and display in rows and columns -->
+                    <div class="row">
+                            <div class= "col-xs-3"><h3>Name</h3></div>
+                            <div class= "col-xs-3"><h3>Address</h3></div>
+                            <div class= "col-xs-3"><h3>Phone</h3></div>
+                            <div class= "col-xs-3"><h3>Rating</h3></div>
+                        </div>
                     {% for business in businesses %}
-                        <h1>{{ business["name"] }}</h1><br>
+                        <div class="row">
+                            <div class= "col-xs-3">{{ business["name"] }}</div>
+                            <!-- Display only the street address -->
+                            <div class= "col-xs-3">{{ business["address"][0] }}</div>
+                            <div class= "col-xs-3">{{ business["phone"] }}</div>
+                            <div class= "col-xs-3">{{ business["rating"] }}</div>
+                        </div>
                     {% endfor %}
+                    <br>
                     <a href="{{ url_for('index') }}">Look up another address</a>
+                    <br>
                 {% else %}
-                    <h1>Find Yelp suggestions near you.</h1><br>
+                    <h1>Find Yelp suggestions near you</h1><br>
                     
                     <form action="/" class="form-inline">
                         <div class="form-group">
-                            <h2>Enter your address below:</h2>
-                            <input type="text" name="address" placeholder="street, city, state" class="form-control"><br><br>
-                            <h2>Enter terms below:</h2>
-                            <input type="text" name="terms" placeholder="ex: food, drinks" class="form-control">
+                            <p>Find (enter term(s)):</p>
+                            <input type="text" name="terms" placeholder="ex: food, drinks" class="form-control"><br><br>
+                            <p>Near (enter address):</p>
+                            <input type="text" name="address" placeholder="ex: street, city, state" class="form-control">
                         </div>
                         <br><br>
                         <input type="submit" value="Submit" class="btn btn-primary">
